@@ -14,7 +14,7 @@ window.onload = function () {
     window.addEventListener('mousemove', function (event) {
         mouse.x = event.x;
         mouse.y = event.y;
-    })};
+    });
     var colorArray = [
         '#3498DB',
         '#E74C3C',
@@ -73,3 +73,35 @@ window.onload = function () {
             this.draw();
         }
     }
+    var CircleArray = [];
+
+    function init() {
+
+        CircleArray = [];
+        for (var i = 1; i <= 100; i++) {
+            var radius = Math.random() * 5 + 1;
+            var x = Math.random() * (innerWidth - radius * 2) + (radius);
+            var y = Math.random() * (innerHeight - radius * 2) + (radius);
+            var dx = (Math.random() - 0.5) * 5;
+            var dy = (Math.random() - 0.5) * 5;
+
+            CircleArray.push(new Circle(x, y, dx, dy, radius));
+        }
+
+    }
+    init();
+
+    function animate() {
+        requestAnimationFrame(animate);
+
+        ctx.clearRect(0, 0, innerWidth, innerHeight);
+        for (var j = 0; j < CircleArray.length; j++) {
+            CircleArray[j].update();
+        }
+    }
+
+    animate();
+
+
+
+}
